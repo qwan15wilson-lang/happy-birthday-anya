@@ -12,6 +12,8 @@
             --accent-pink: #ff4d6d;
             --accent-purple: #c77dff;
             --text-color: #f8f9fa;
+            --chat-left: #2a2438;
+            --chat-right: #ff4d6d;
         }
 
         body {
@@ -50,7 +52,7 @@
         }
 
         h1 { color: var(--accent-pink); font-size: 1.8rem; margin-bottom: 10px; }
-        h2 { color: var(--accent-purple); font-size: 1.4rem; }
+        h2 { color: var(--accent-purple); font-size: 1.3rem; margin-top: 15px; }
         p { font-size: 1rem; line-height: 1.5; opacity: 0.9; }
 
         /* Game Section */
@@ -104,9 +106,47 @@
             cursor: pointer;
             box-shadow: 0 4px 15px rgba(255, 77, 109, 0.4);
             transition: transform 0.2s;
+            margin-top: 15px;
         }
 
         button:active { transform: scale(0.95); }
+
+        /* Chat UI for Best Moments */
+        .chat-container {
+            width: 100%;
+            background: var(--card-bg);
+            border-radius: 15px;
+            padding: 15px;
+            box-sizing: border-box;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            margin: 10px 0;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            text-align: left;
+        }
+
+        .chat-bubble {
+            max-width: 80%;
+            padding: 10px 14px;
+            border-radius: 18px;
+            font-size: 0.9rem;
+            line-height: 1.4;
+            word-wrap: break-word;
+        }
+
+        .chat-bubble.left {
+            background: var(--chat-left);
+            align-self: flex-start;
+            border-bottom-left-radius: 4px;
+        }
+
+        .chat-bubble.right {
+            background: var(--chat-right);
+            color: white;
+            align-self: flex-end;
+            border-bottom-right-radius: 4px;
+        }
 
         /* Collage Section */
         .collage {
@@ -137,7 +177,10 @@
             border-radius: 15px;
             border: 1px solid var(--accent-pink);
             margin-top: 15px;
-            font-style: italic;
+            text-align: left;
+            white-space: pre-line;
+            font-size: 0.95rem;
+            line-height: 1.6;
         }
     </style>
 </head>
@@ -156,31 +199,79 @@
         <h1>Secret Date Passcode 🔒</h1>
         <p>Enter the special date when we first met (DDMMYYYY):</p>
         <input type="password" id="passcode" placeholder="Enter date..." maxlength="8" pattern="\d*">
-        <button onclick="checkPasscode()">Unlock Surprise ✨</button>
+        <button onclick="checkPasscode()">Unlock Story ✨</button>
         <p id="error-msg" style="color: #ff6b6b; margin-top: 10px; display: none;">Oops! Wrong date. Think back to where it all started! ❤️</p>
     </div>
 
-    <!-- Section 3: Birthday Surprise & Collage -->
+    <!-- Section 3: Best Moments -->
+    <div id="sec-moments" class="section">
+        <h1>Best Moments 💖</h1>
+        <p>No grand proposals... just pure, unscripted feelings from both sides. ✨</p>
+
+        <h2>Where It Started 💬</h2>
+        <div class="chat-container">
+            <div class="chat-bubble left">Aashiqon ki gand masti to dekho</div>
+            <div class="chat-bubble right">Heheh apko b utha lu cy</div>
+            <div class="chat-bubble right">Cya</div>
+        </div>
+
+        <h2>When Feelings Met ❤️</h2>
+        <div class="chat-container">
+            <div class="chat-bubble right">Heheh ik mommy me samjh gaya hu apko pura that's why I love you</div>
+            <div class="chat-bubble left">Kaha aane me ?🥺🫶</div>
+            <div class="chat-bubble left">Noi ye samajhne me😭</div>
+            <div class="chat-bubble left">I love you too baccha ummmmah 💋🫶🌸</div>
+        </div>
+
+        <button onclick="goToBirthday()">See Birthday Surprise 🎂</button>
+    </div>
+
+    <!-- Section 4: Birthday Surprise & Collage -->
     <div id="sec-surprise" class="section">
         <h1>Happy Birthday Ananya! 🎂✨</h1>
         
         <div class="collage">
             <div class="photo-card">
-                <img src="https://picsum.photos/300/300?random=1" alt="Memory 1">
+                <img src="pic1.jpg" alt="Memory 1">
             </div>
             <div class="photo-card">
-                <img src="https://picsum.photos/300/300?random=2" alt="Memory 2">
+                <img src="pic2.jpg" alt="Memory 2">
             </div>
             <div class="photo-card">
-                <img src="https://picsum.photos/300/300?random=3" alt="Memory 3">
+                <img src="pic3.jpg" alt="Memory 3">
             </div>
             <div class="photo-card">
-                <img src="https://picsum.photos/300/300?random=4" alt="Memory 4">
+                <img src="pic4.jpg" alt="Memory 4">
             </div>
         </div>
 
         <div class="message-box">
-            <p>"To the most amazing person who makes every single day brighter. Thank you for being you, for all the laughter, and for every beautiful memory we share. Wishing you a year filled with endless happiness, love, and sweet moments! Happy Birthday! ❤️"</p>
+Happy Birthday to the most special person in my life, my love, my favourite person, and the one who makes my world a little more beautiful every single day🥺🎀💗🫶🏻✨
+
+I honestly don’t know where to begin because there are so many things I want to say to you today. First of all, I just want you to know how grateful I am to have you in my life. You have become such an important part of my world, and I genuinely cannot imagine my days without you anymore🥺🎀💗🫶🏻✨
+
+Every little moment with you means so much to me. Whether we are talking for hours, laughing over the most random things, annoying each other, arguing over silly things, or simply spending time together, somehow every moment becomes a memory that I want to keep forever. 🥺🎀💗🫶🏻✨
+
+You have a way of making even ordinary days feel special. Your smile, your little habits, the way you talk, the way you get annoyed, the way you care, and even the little things you probably don't realize you do — I love them all. You are truly one of the most precious people in my life ✨🫶🏻🥺🎀💗
+
+On your birthday, I don't just wish you happiness for today. I wish you a lifetime full of happiness, peace, success, beautiful memories, and everything your heart wishes for. I hope you achieve every dream you have, and whenever life gets difficult, I hope you always remember how strong and special you are🥺💗🎀🫶🏻✨
+
+I also want to thank you for being a part of my life and for giving me so many beautiful memories. I may not always be perfect, and sometimes I might annoy you or say something wrong, but one thing I can promise is that you will always have a very special place in my heart🥺💗🎀🫶🏻✨
+
+I hope this new year of your life brings you countless reasons to smile. I hope you laugh more, worry less, experience beautiful things, and create memories that you'll remember forever. And selfishly, I hope I get to be a part of many of those memories with you🥺💗🎀🫶🏻✨
+
+Today is your day, so forget about everything else for a while and just enjoy yourself. Smile as much as you can, eat your favourite food, enjoy every little moment, and remember that there is someone here who feels incredibly lucky just because he gets to call you his🥺💗🎀🫶🏻✨
+
+Happy Birthday once again, Ananya🥺💗🎀🫶🏻✨
+
+I hope you know just how loved, appreciated, and special you are. No matter how many birthdays come and go, I hope every year reminds you of how beautiful your presence is in the lives of the people who love you✨🥺💗🎀🫶🏻
+
+May this birthday be the beginning of one of the happiest chapters of your life🥺💗🎀🫶🏻✨
+
+Happy Birthday anya baby 🥺✨🎀💗🫶🏻✨
+I love you more than words can properly explain, and I hope today gives you even a little bit of the happiness you bring into my life every day ✨🥺💗🎀🫶🏻
+
+IIIIIIIIIIIIII LOVEEEEEEEEEEEEEEEEEEEEEEEEEEE YOUUUUUUUUUUUUUUUUUUUUU SOOOOOOOOOOOOOOOOOOOO MUCHHHHHHHHHHHHHHHHHHHHH MOREEEEEE AND MOREEEE ANYAAAA BABYYYYYYY MUHWAAAAA 🫶🏻🎀💗🥺✨
         </div>
     </div>
 
@@ -218,19 +309,24 @@
             const input = document.getElementById('passcode').value.trim();
             if (input === '07112025') {
                 document.getElementById('sec-puzzle').classList.remove('active');
-                document.getElementById('sec-surprise').classList.add('active');
-                
-                // Launch Confetti
-                confetti({
-                    particleCount: 120,
-                    spread: 70,
-                    origin: { y: 0.6 }
-                });
+                document.getElementById('sec-moments').classList.add('active');
             } else {
                 document.getElementById('error-msg').style.display = 'block';
             }
         }
+
+        // Best Moments to Surprise Transition
+        function goToBirthday() {
+            document.getElementById('sec-moments').classList.remove('active');
+            document.getElementById('sec-surprise').classList.add('active');
+            
+            // Launch Confetti
+            confetti({
+                particleCount: 120,
+                spread: 70,
+                origin: { y: 0.6 }
+            });
+        }
     </script>
 </body>
-          </html>
-          
+</html>
