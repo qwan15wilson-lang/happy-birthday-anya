@@ -55,6 +55,29 @@
         h2 { color: var(--accent-purple); font-size: 1.3rem; margin-top: 15px; }
         p { font-size: 1rem; line-height: 1.5; opacity: 0.9; }
 
+        /* Floating Music Button */
+        .music-btn {
+            position: fixed;
+            top: 15px;
+            right: 15px;
+            background: rgba(255, 77, 109, 0.8);
+            border: 1px solid #fff;
+            color: white;
+            border-radius: 50%;
+            width: 45px;
+            height: 45px;
+            font-size: 1.2rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            z-index: 1000;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+            transition: transform 0.2s;
+        }
+
+        .music-btn:active { transform: scale(0.9); }
+
         /* Game Section */
         #game-canvas {
             width: 100%;
@@ -186,6 +209,14 @@
 </head>
 <body>
 
+    <!-- Audio Element -->
+    <audio id="bg-music" loop>
+        <source src="song.mp3" type="audio/mpeg">
+    </audio>
+
+    <!-- Music Control Button -->
+    <button class="music-btn" onclick="toggleMusic()" id="music-toggle-btn">🎵</button>
+
     <!-- Section 1: Heart Game -->
     <div id="sec-game" class="section active">
         <h1>Catch My Hearts! 💖</h1>
@@ -276,6 +307,33 @@ IIIIIIIIIIIIII LOVEEEEEEEEEEEEEEEEEEEEEEEEEEE YOUUUUUUUUUUUUUUUUUUUUU SOOOOOOOOO
     </div>
 
     <script>
+        // Audio Logic
+        const music = document.getElementById('bg-music');
+        const musicBtn = document.getElementById('music-toggle-btn');
+        let isPlaying = false;
+
+        function toggleMusic() {
+            if (isPlaying) {
+                music.pause();
+                musicBtn.innerText = '🎵';
+                isPlaying = false;
+            } else {
+                music.play();
+                musicBtn.innerText = '🔊';
+                isPlaying = true;
+            }
+        }
+
+        // Auto-start music on first tap anywhere
+        document.body.addEventListener('click', function() {
+            if (!isPlaying) {
+                music.play().then(() => {
+                    isPlaying = true;
+                    musicBtn.innerText = '🔊';
+                }).catch(() => {});
+            }
+        }, { once: true });
+
         // Game Logic
         let score = 0;
         const canvas = document.getElementById('game-canvas');
