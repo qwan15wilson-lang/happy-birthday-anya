@@ -209,9 +209,10 @@
 </head>
 <body>
 
-    <!-- Audio Element -->
-    <audio id="bg-music" loop>
+    <!-- Audio Element with Direct Raw Audio Path -->
+    <audio id="bg-music" loop preload="auto">
         <source src="song.mp3" type="audio/mpeg">
+        <source src="https://raw.githubusercontent.com/sum3dhlovesanya-lang/happy-birthday-anya/main/song.mp3" type="audio/mpeg">
     </audio>
 
     <!-- Music Control Button -->
@@ -307,10 +308,19 @@ IIIIIIIIIIIIII LOVEEEEEEEEEEEEEEEEEEEEEEEEEEE YOUUUUUUUUUUUUUUUUUUUUU SOOOOOOOOO
     </div>
 
     <script>
-        // Audio Logic
+        // Audio Toggle Logic
         const music = document.getElementById('bg-music');
         const musicBtn = document.getElementById('music-toggle-btn');
         let isPlaying = false;
+
+        function playAudio() {
+            music.play().then(() => {
+                isPlaying = true;
+                musicBtn.innerText = '🔊';
+            }).catch(e => {
+                console.log("Audio waiting for user interaction");
+            });
+        }
 
         function toggleMusic() {
             if (isPlaying) {
@@ -318,21 +328,21 @@ IIIIIIIIIIIIII LOVEEEEEEEEEEEEEEEEEEEEEEEEEEE YOUUUUUUUUUUUUUUUUUUUUU SOOOOOOOOO
                 musicBtn.innerText = '🎵';
                 isPlaying = false;
             } else {
-                music.play();
-                musicBtn.innerText = '🔊';
-                isPlaying = true;
+                playAudio();
             }
         }
 
-        // Auto-start music on first tap anywhere
-        document.body.addEventListener('click', function() {
+        // Auto-play music on any user touch/click on mobile screen
+        const startAudioOnInteraction = () => {
             if (!isPlaying) {
-                music.play().then(() => {
-                    isPlaying = true;
-                    musicBtn.innerText = '🔊';
-                }).catch(() => {});
+                playAudio();
             }
-        }, { once: true });
+            document.removeEventListener('click', startAudioOnInteraction);
+            document.removeEventListener('touchstart', startAudioOnInteraction);
+        };
+
+        document.addEventListener('click', startAudioOnInteraction);
+        document.addEventListener('touchstart', startAudioOnInteraction);
 
         // Game Logic
         let score = 0;
@@ -345,7 +355,8 @@ IIIIIIIIIIIIII LOVEEEEEEEEEEEEEEEEEEEEEEEEEEE YOUUUUUUUUUUUUUUUUUUUUU SOOOOOOOOO
             heart.innerHTML = '💖';
             heart.style.left = Math.random() * (canvas.clientWidth - 40) + 'px';
             
-            heart.onclick = () => {
+            heart.onclick = (e) => {
+                e.stopPropagation();
                 score++;
                 document.getElementById('score').innerText = score;
                 heart.remove();
